@@ -7,55 +7,13 @@ import "devextreme/dist/css/dx.light.compact.css";
 import { Template } from "devextreme-react/core/template";
 
 import { SlideOutView } from "devextreme-react/ui/slide-out-view";
-import { Toolbar } from "devextreme-react/ui/toolbar";
-import { TreeView } from "devextreme-react/ui/tree-view";
 
-function renderViewTamplate() {
+import renderMenuTemplate from "./renderMenuTemplate"
+
+function renderViewTemplate() {
     return (
         <React.Fragment>
             <p>View content</p>
-        </React.Fragment>
-    );
-}
-function renderMenuTamplate() {
-    const items = [{ 
-        location: "before",
-        widget: "dxButton",
-        locateInMenu: "auto",
-        options: {
-            icon: 'menu',
-            onClick: this.showMenu
-        }
-    }, {
-        location: "center",
-        locateInMenu: "auto",
-        template: "itemTemplate"
-    }];
-    const menuItems = [{ 
-        text: "Home",
-        expanded: true,
-        icon: "home",
-        items: [
-            { text: "Profile", path: "profile" },
-            { text: "Settings", path: "settings" }
-        ]
-    }, {
-        text: "About",
-        icon: "info",
-        path: "about"
-    }];
-
-    return (
-        <React.Fragment>
-            <Toolbar items={items}>
-                <Template name="itemTemplate" render={() => <h4>Demo</h4>}/>
-            </Toolbar>
-            <TreeView class="navigation-treeview" 
-                items={menuItems}
-                onItemClick={this.onItemSelectionChanged}
-                selectByClick={true}
-                selectionMode="single"
-            ></TreeView>
         </React.Fragment>
     );
 }
@@ -76,8 +34,8 @@ class App extends Component {
             <SlideOutView class="slide-layout"
                 swipeEnabled={true}
                 menuVisible={this.state.menuVisible}
-                menuRender={renderMenuTamplate}
-                contentRender={renderViewTamplate}
+                menuRender={renderMenuTemplate.bind(this)}
+                contentRender={renderViewTemplate}
                 onOptionChanged={(args) => args.name === "menuVisible" && this.setState({ menuVisible: args.value })}
             ></SlideOutView>
         </div>
