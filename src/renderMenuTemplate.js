@@ -9,8 +9,12 @@ import { TreeView } from "devextreme-react/ui/tree-view";
 function renderMenuTemplate() {
     const items = [{ 
         location: "before",
-        // locateInMenu: "auto",
-        template: "menuButtonTemplate"
+        locateInMenu: "auto",
+        widget: "dxButton",
+        options: {
+            icon: "menu",
+            onClick: this.showMenu
+        }
     }, {
         location: "center",
         // locateInMenu: "auto",
@@ -33,7 +37,6 @@ function renderMenuTemplate() {
     return (
         <React.Fragment>
             <Toolbar items={items}>
-                <Template name="menuButtonTemplate" render={() => <Button icon="menu" onClick={this.showMenu}></Button>}/>
                 <Template name="menuTextTemplate" render={() => <h4>Demo</h4>}/>
             </Toolbar>
             <TreeView class="navigation-treeview" 
